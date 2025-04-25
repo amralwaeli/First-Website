@@ -1,0 +1,475 @@
+/* === Base Styles === */
+:root {
+    --primary-color: #0056b3; 
+    --secondary-color: #333;
+    --background-color: #f8f9fa;
+    --text-color: #343a40;
+    --light-gray: #e9ecef;
+    --white: #ffffff;
+    --header-height: 70px; /
+
+    --font-primary: 'Arial', sans-serif; 
+    --font-secondary: 'Georgia', serif;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-primary);
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block; /* Prevents bottom space */
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover,
+a:focus {
+    color: darken(var(--primary-color), 10%);
+    text-decoration: underline;
+}
+
+
+a:focus,
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Remove outline for non-keyboard focus if desired, but ensure keyboard users have it */
+*:focus:not(:focus-visible) {
+  outline: none;
+  outline-offset: 0;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 0.75em;
+    line-height: 1.2;
+    color: var(--secondary-color);
+}
+
+p {
+    margin-bottom: 1em;
+}
+
+ul {
+    list-style: none; /* Reset list style */
+    padding-left: 0; /* Remove default padding */
+}
+/* If i want bullet points inside sections, re-apply style */
+.about-text ul {
+    list-style: disc;
+    padding-left: 20px; /* Add padding for bullets */
+    margin-bottom: 1em;
+}
+.about-text ul li {
+    margin-bottom: 0.5em;
+}
+
+
+/* === Header & Navigation === */
+.site-header {
+    background-color: var(--white);
+    padding: 10px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: var(--header-height);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--secondary-color);
+}
+
+.main-nav .nav-list {
+    display: flex;
+    gap: 20px;
+}
+
+.main-nav a {
+    color: var(--secondary-color);
+    font-weight: 500;
+    padding: 5px 0;
+    position: relative; /* For active indicator */
+}
+
+.main-nav a:hover,
+.main-nav a:focus {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.main-nav a.active {
+    color: var(--primary-color);
+    font-weight: bold;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+/* Mobile Navigation Toggle */
+.nav-toggle {
+    display: none; /* Hidden by default on larger screens */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 110; /* Above nav list */
+}
+
+.hamburger {
+    display: block;
+    position: relative;
+    width: 25px;
+    height: 3px;
+    background-color: var(--secondary-color);
+    transition: transform 0.3s ease;
+}
+
+.hamburger::before,
+.hamburger::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--secondary-color);
+    transition: transform 0.3s ease, top 0.3s ease, bottom 0.3s ease;
+}
+
+.hamburger::before {
+    top: -8px;
+}
+
+.hamburger::after {
+    bottom: -8px;
+}
+
+
+/* === Main Content === */
+.main-content {
+    flex-grow: 1; /* Pushes footer down */
+    padding-top: 30px; /* Space below sticky header */
+    padding-bottom: 40px;
+}
+
+/* Hero Section (Home Page) */
+.hero {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: var(--light-gray); /* Light background for contrast */
+}
+
+.hero h1 {
+    font-size: 2.8em;
+    margin-bottom: 0.3em;
+}
+
+.hero .subtitle {
+    font-size: 1.2em;
+    color: #555;
+    margin-bottom: 1.5em;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover,
+.cta-button:focus {
+    background-color: darken(var(--primary-color), 10%);
+    color: var(--white);
+    text-decoration: none;
+}
+
+/* Intro Preview Section (Home Page) */
+.intro-preview {
+    padding: 40px 0;
+}
+.intro-preview h2 {
+    color: var(--primary-color);
+    margin-bottom: 0.5em;
+}
+
+/* About Section */
+.about-section {
+    padding: 40px 0;
+}
+
+.about-container {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start; /* Align items at the top */
+}
+
+.profile-image {
+    width: 250px; /* Adjust size as needed */
+    height: 250px;
+    object-fit: cover; /* Ensures image covers the area without distortion */
+    border-radius: 50%; /* Circular image */
+    flex-shrink: 0; /* Prevent image from shrinking */
+    border: 5px solid var(--white);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.about-text {
+    flex-grow: 1; /* Takes remaining space */
+}
+
+/* Projects Section */
+.projects-section {
+    padding: 40px 0;
+}
+
+.projects-grid {
+    display: grid;
+    /* Uses auto-fit to create as many columns as fit, each at least 300px wide */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px; /* Space between grid items */
+    margin-top: 20px;
+}
+
+.project-card {
+    background-color: var(--white);
+    border-radius: 8px;
+    overflow: hidden; /* Clips image corners if needed */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    display: flex; /* Use flexbox for card content layout */
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+}
+
+.project-image {
+    width: 100%;
+    height: 200px; /* Fixed height for consistency */
+    object-fit: cover; /* Cover the area */
+}
+
+.project-info {
+    padding: 20px;
+    flex-grow: 1; /* Allows info to fill space if card heights vary */
+    display: flex;
+    flex-direction: column;
+}
+
+.project-info h2 {
+    margin-bottom: 0.5em;
+    font-size: 1.4em;
+}
+
+.project-info p {
+    font-size: 0.95em;
+    margin-bottom: 1em;
+    flex-grow: 1; /* Pushes links to the bottom */
+}
+
+.project-links {
+    margin-top: auto; /* Pushes links to the bottom */
+    display: flex;
+    gap: 10px;
+}
+
+.project-links .button {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 8px 15px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+.project-links .button:hover,
+.project-links .button:focus {
+    background-color: darken(var(--primary-color), 10%);
+    color: var(--white);
+    text-decoration: none;
+}
+
+
+/* === Footer === */
+.site-footer {
+    background-color: var(--secondary-color);
+    color: var(--light-gray);
+    text-align: center;
+    padding: 20px 0;
+    margin-top: auto; /* Pushes footer to bottom */
+}
+
+.site-footer p {
+    margin-bottom: 0;
+}
+.site-footer a {
+    color: var(--white);
+}
+.site-footer a:hover,
+.site-footer a:focus {
+    color: var(--light-gray);
+    text-decoration: underline;
+}
+
+
+/* === Responsive Design === */
+@media (max-width: 768px) {
+    :root {
+        --header-height: 60px;
+    }
+
+    .header-container {
+        position: relative; /* Needed for absolute positioning of nav list */
+    }
+
+    .nav-toggle {
+        display: block; /* Show hamburger */
+    }
+
+    .main-nav .nav-list {
+        position: absolute;
+        top: var(--header-height); /* Position below header */
+        left: 0;
+        right: 0;
+        background-color: var(--white);
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        /* Hide by default using transform */
+        transform: scaleY(0);
+        transform-origin: top;
+        transition: transform 0.3s ease-out;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    /* Style for when nav is open */
+    .main-nav.nav-open .nav-list {
+        transform: scaleY(1);
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    /* Hamburger animation when open */
+    .nav-open .hamburger {
+         transform: rotate(45deg);
+    }
+     .nav-open .hamburger::before {
+         top: 0;
+         transform: rotate(90deg);
+    }
+     .nav-open .hamburger::after {
+        bottom: 0;
+        transform: rotate(90deg);
+        opacity: 0; /* Hide bottom bar */
+    }
+
+    .main-nav .nav-list li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .main-nav .nav-list a {
+        display: block;
+        padding: 10px 0;
+        width: 100%;
+    }
+    .main-nav a.active {
+        border-bottom: none; /* Remove border on mobile */
+        background-color: var(--light-gray); /* Indicate active page */
+    }
+
+
+    .hero h1 {
+        font-size: 2.2em;
+    }
+    .hero .subtitle {
+        font-size: 1.1em;
+    }
+
+    .about-container {
+        flex-direction: column; /* Stack image and text */
+        align-items: center; /* Center items */
+        text-align: center;
+    }
+    .profile-image {
+        margin-bottom: 20px;
+        width: 200px; /* Smaller image on mobile */
+        height: 200px;
+    }
+     .about-text {
+        text-align: left; /* Reset text align for paragraphs */
+    }
+
+    .projects-grid {
+        /* Ensure single column if cards are too wide */
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 1.8em;
+    }
+    .hero .subtitle {
+        font-size: 1em;
+    }
+
+    .logo {
+        font-size: 1.3em;
+    }
+
+    .container {
+        padding: 0 15px;
+    }
+}
